@@ -5,6 +5,7 @@ import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.api.java.function.Function2;
 import org.apache.spark.storage.StorageLevel;
+import org.springframework.util.StringUtils;
 import scala.Tuple2;
 
 import java.util.Comparator;
@@ -37,16 +38,15 @@ public class Main {
         JavaRDD<String> driverRawData = sc.textFile("data/drivers.txt");
         JavaRDD<Driver> driverRdd = driverRawData.map(Driver::fromString);
         System.out.println("Top 3 drivers travelled maximum");
-        List<Tuple2<Integer, Driver>> topThreeDrivers = tripRdd.mapToPair(t -> new Tuple2<>(t.getDriverId(), t.getDistance()))
+        List<Tuple2<Integer, Driver>> topThreeDrivers = tripRdd
+                .mapToPair(t -> new Tuple2<>(t.getDriverId(), t.getDistance()))
                 .reduceByKey((d1, d2) -> d1 + d2)
-//                .mapToPair(Tuple2::swap)
-//                .sortByKey(false)
-//                .mapToPair(Tuple2::swap)
                 .join(driverRdd.mapToPair(d -> new Tuple2<>(d.getId(), d)))
-                .mapToPair(t -> new Tuple2<>(t._2()._1(), t._2()._2()))
-//                .top(3, new MyComp())
+                .mapToPair(Tuple2::_2)
+                .top(3, new MyComp());
+  /* instead of .top() to avoid Comparator
                 .sortByKey(false)
-                .take(3);
+                .take(3);*/
         topThreeDrivers.forEach(System.out::println);
     }
 }

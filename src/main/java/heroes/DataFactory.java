@@ -1,5 +1,7 @@
 package heroes;
 
+import heroes.weapon.Weapon;
+
 import java.util.List;
 import java.util.Random;
 

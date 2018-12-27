@@ -1,4 +1,4 @@
-package heroes;
+package heroes.weapon;
 
 /**
  * @author Evgeny Borisov

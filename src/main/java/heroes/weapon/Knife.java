@@ -1,8 +1,11 @@
-package heroes;
+package heroes.weapon;
 
+import heroes.annotation.BrightArmy;
+import heroes.character.Character;
+import heroes.annotation.DarkArmy;
 import org.springframework.stereotype.Component;
 
-import static heroes.WeaponType.SHORT_DISTANCE;
+import static heroes.weapon.WeaponType.SHORT_DISTANCE;
 
 /**
  * @author Evgeny Borisov

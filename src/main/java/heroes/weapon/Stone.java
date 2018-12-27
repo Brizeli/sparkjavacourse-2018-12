@@ -1,18 +1,20 @@
-package heroes;
+package heroes.weapon;
 
+import heroes.character.Character;
+import heroes.annotation.DarkArmy;
 import org.springframework.stereotype.Component;
 
-import static heroes.WeaponType.LONG_DISTANCE;
+import static heroes.weapon.WeaponType.LONG_DISTANCE;
 
 /**
  * @author Evgeny Borisov
  */
 @Component
-@BrightArmy
-public class Spear implements Weapon {
+@DarkArmy
+public class Stone implements Weapon {
     @Override
     public void kick(Character owner, Character enemy) {
-        System.out.println("Spear kick you");
+        System.out.println("Stone kick you");
     }
 
     @Override

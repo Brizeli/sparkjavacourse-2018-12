@@ -1,4 +1,4 @@
-package heroes;/**
+package heroes.annotation;/**
  * @author Evgeny Borisov
  */
 
@@ -10,5 +10,5 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Retention(RUNTIME)
 @Qualifier
-public @interface BrightArmy {
+public @interface DarkArmy {
 }

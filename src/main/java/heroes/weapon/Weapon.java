@@ -1,4 +1,6 @@
-package heroes;
+package heroes.weapon;
+
+import heroes.character.Character;
 
 /**
  * @author Evgeny Borisov

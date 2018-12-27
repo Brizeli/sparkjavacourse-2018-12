@@ -19,7 +19,7 @@ public class TaxCalcTest {
 
         TaxCalc taxCalc = new TaxCalc(mock);
         double withMaam = taxCalc.withMaam(100);
-        Assert.assertEquals(117,withMaam,0.00001);
+        Assert.assertEquals(117, withMaam, 0.00001);
     }
 
 

@@ -1,5 +1,6 @@
 package spark.taxi;
 
+import org.apache.spark.Accumulator;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
@@ -26,8 +27,12 @@ public class Main {
         JavaRDD<Trip> tripRdd = tripRawData.map(String::toLowerCase).map(Trip::fromString);
         tripRdd.persist(StorageLevel.MEMORY_AND_DISK());
         System.out.println("All trips to Boston over 10 km");
+        Accumulator<Integer> accumulator = sc.accumulator(0, "5 km");
         JavaRDD<Trip> bostonRDD = tripRdd
-                .filter(t -> t.getDestination().equals(BOSTON));
+                .filter(t -> {
+                    accumulator.add(1);
+                    return t.getDestination().equals(BOSTON);
+                });
         JavaRDD<Trip> bostonOverTenKm = bostonRDD
                 .filter(t -> t.distance >= 10);
         System.out.println(bostonOverTenKm);
